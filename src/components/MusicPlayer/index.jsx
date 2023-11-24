@@ -19,7 +19,7 @@ const MusicPlayer = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currentSongs.length) dispatch(playPause(true));
+    if (currentSongs.duration) dispatch(playPause(true));
   }, [currentIndex]);
 
   const handlePlayPause = () => {
@@ -36,17 +36,17 @@ const MusicPlayer = () => {
     dispatch(playPause(false));
 
     if (!shuffle) {
-      dispatch(nextSong((currentIndex + 1) % currentSongs.length));
+      dispatch(nextSong((currentIndex + 1) % currentSongs.duration));
     } else {
-      dispatch(nextSong(Math.floor(Math.random() * currentSongs.length)));
+      dispatch(nextSong(Math.floor(Math.random() * currentSongs.duration)));
     }
   };
 
   const handlePrevSong = () => {
     if (currentIndex === 0) {
-      dispatch(prevSong(currentSongs.length - 1));
+      dispatch(prevSong(currentSongs.duration - 1));
     } else if (shuffle) {
-      dispatch(prevSong(Math.floor(Math.random() * currentSongs.length)));
+      dispatch(prevSong(Math.floor(Math.random() * currentSongs.duration)));
     } else {
       dispatch(prevSong(currentIndex - 1));
     }
