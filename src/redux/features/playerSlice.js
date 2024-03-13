@@ -23,9 +23,8 @@ const playerSlice = createSlice({
       } else {
         state.currentSongs = action.payload.data.tracks.data;
       }
-      
+
       state.currentIndex = action.payload.i;
-      console.log(action.payload.data)
       state.isActive = true;
     },
 

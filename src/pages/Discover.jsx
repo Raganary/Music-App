@@ -10,13 +10,14 @@ const Discover = () => {
     const dispatch = useDispatch();
     const {activeSong, isPlaying, genreListId} = useSelector((state) => state.player);
 
-    const { data, isFetching, error } = useGetSongsByGenreQuery(genreListId || 'POP');
+    const { data, isFetching, error } = useGetSongsByGenreQuery(genreListId || '1963962142');
 
     if(isFetching) return <Loader title="Loading songs..." />;
 
     if(error) return <Error />;
 
-    const genreTitle = genres.find(({value}) => value === genreListId?.title);  
+    //react object that has two values Object {title, value}
+    const genreTitle = genres.find(({value}) => value === genreListId)?.title;  
 
     return (
         <div className='flex flex-col'>
@@ -24,7 +25,7 @@ const Discover = () => {
                 <h2 className='font-bold text-3xl text-white text-left'>Discover {genreTitle}</h2>
                 <select 
                     onChange={(e) => dispatch(selectGenreListId(e.target.value))}
-                    value= {genreListId || 'Pop'}
+                    value= {genreListId || '1963962142'}
                     className='bg-black text-gray-300 p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5'
                 >
                     {genres.map((genre) => <option key={genre.value} value={genre.value}>{genre.title}</option>)}
