@@ -9,13 +9,14 @@ import { useGetSongsByGenreQuery } from '../redux/services/deezerCore';
 const Discover = () => {
     const dispatch = useDispatch();
     const {activeSong, isPlaying, genreListId} = useSelector((state) => state.player);
-    const { data, isFetching, error } = useGetSongsByGenreQuery(genreListId || 'pop');
+
+    const { data, isFetching, error } = useGetSongsByGenreQuery(genreListId || 'POP');
 
     if(isFetching) return <Loader title="Loading songs..." />;
 
     if(error) return <Error />;
 
-    const genreTitle = genres.find(({value}) => value === genreListId?.title);    
+    const genreTitle = genres.find(({value}) => value === genreListId?.title);  
 
     return (
         <div className='flex flex-col'>
@@ -23,7 +24,7 @@ const Discover = () => {
                 <h2 className='font-bold text-3xl text-white text-left'>Discover {genreTitle}</h2>
                 <select 
                     onChange={(e) => dispatch(selectGenreListId(e.target.value))}
-                    value= {genreListId || 'pop'}
+                    value= {genreListId || 'Pop'}
                     className='bg-black text-gray-300 p-3 text-sm rounded-lg outline-none sm:mt-0 mt-5'
                 >
                     {genres.map((genre) => <option key={genre.value} value={genre.value}>{genre.title}</option>)}
@@ -31,7 +32,7 @@ const Discover = () => {
             </div>
 
             <div className='flex flex-wrap sm:justify-start justify-center gap-8'>
-                {data.tracks.data?.map((song,i) => (
+                {data?.tracks?.data.map((song,i) => (
                     <SongCard 
                         key={song.id}
                         song={song}

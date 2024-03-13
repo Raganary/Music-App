@@ -29,7 +29,7 @@ export const deezerCoreApi = createApi({
   endpoints: (builder) => ({
     getTopCharts: builder.query({query: () => '/playlist/1313621735/'}),
     //need to find lyrics and fix detail header
-    getSongsByGenre: builder.query({query: ({genre}) => `/charts/genre/${genre}`}),
+    getSongsByGenre: builder.query({query: ({genre}) => `/playlist/${genre}/`}),
 
     getSongDetails: builder.query({query: ({songid}) => `/tracks?`}),
     
