@@ -35,17 +35,24 @@ const TopChartCard = ({song, i, isPlaying, activeSong, handlePlayClick, handlePa
   </div>
 )
 
+const ArtistImage = ({track}) => {
+  const {data: artistData, isFetching:isFetchingArtistDetails } = useGetArtistDetailsQuery(track?.artist?.id);
+
+  return (
+      <img src={artistData?.picture_medium}className='w-[140px] rounded-full object-cover'/>
+  );
+};
+
 const TopPlay = () => {
   const dispatch = useDispatch();
   const {activeSong, isPlaying} = useSelector((state) => state.player);
   const {data} = useGetTopChartsQuery();
   const divRef = useRef(null);
-
+  const topPlays = data?.tracks.data.slice(0,5);
+  console.log(topPlays)
   useEffect(() => {
     divRef.current.scrollIntoView({behavior: 'smooth'});
   });
-
-  const topPlays = data?.tracks.data.slice(0,5);
 
   const handlePauseClick = () => {
     dispatch(playPause(false));
@@ -106,7 +113,7 @@ const TopPlay = () => {
               className='shadow-lg rounded-full animate-slideright'
             >
               <Link to={`/artist/${song.artist?.id}`}>
-                <img src={song.album?.cover_xl} alt='name' className='w-[155px] rounded-full object-cover'/>
+                <ArtistImage key={song.key} track={song}/>
               </Link>
             </SwiperSlide>
         ))}
