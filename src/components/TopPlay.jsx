@@ -12,16 +12,16 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 
 const TopChartCard = ({song, i, isPlaying, activeSong, handlePlayClick, handlePauseClick}) => (
-  <div className='w-full flex flex-row items-center hover:bg-[#4c426e] py-2 p-4 rounded-lg cursor-pointer mb-2'>
+  <div className='w-full flex flex-row items-center hover:bg-[#3B0D11] py-2 p-4 rounded-lg cursor-pointer'>
     <h3 className='font-bold text-white mr-3'>{i+1}.</h3>
     <div className='flex-1 flex flex-row justify-between items-center'>
-      <img className='w-20 h-20 rounded-lg' src={song.album?.cover_xl} alt={song?.title}/>
+      <img className='w-16 h-16 rounded-lg' src={song.album?.cover_xl} alt={song?.title}/>
       <div className='flex-1 flex flex-col justify-center mx-3'>
         <Link to={`/song/${song.id}`}>
-          <p className='text-xl font-bold text-white'>{song?.title}</p>
+          <p className='font-bold text-white'>{song?.title}</p>
         </Link>
         <Link to={`/artist/${song.artist?.id}`}>
-          <p className='text-base font-bold text-white'>{song?.artist.name}</p>
+          <p className='text-white'>{song?.artist.name}</p>
         </Link>
       </div>
     </div> 
@@ -56,10 +56,10 @@ const TopPlay = () => {
   };
 
   return(
-    <div ref={divRef} className='xl:ml-6 ml-0 xl:mb-0 mb-6 flex-1 xl:max-w-[500px] max-w-full flex flex-col'>
+    <div ref={divRef} className='xl:ml-6 ml-0 xl:mb-0 mb-4 flex-1 xl:max-w-[500px] max-w-full flex flex-col'>
       <div className='w-full flex flex-col'>
         <div className='flex flex-row justify-between items-center'>
-          <h2 className='text-white font-bold text-2xl'>Top Charts</h2>
+          <h2 className='text-white font-bold text-xl'>Top Charts</h2>
           <Link to='/top-charts'>
             <p className='text-gray-300 text-base cursor-pointer'>See more</p>
           </Link>
@@ -80,9 +80,9 @@ const TopPlay = () => {
         </div>
       </div>
 
-      <div className='w-full flex flex-col mt-8'>
+      <div className='w-full flex flex-col mt-4'>
         <div className='flex flex-row justify-between items-center'>
-          <h2 className='text-white font-bold text-2xl'>Top Artists</h2>
+          <h2 className='text-white font-bold text-xl'>Top Artists</h2>
           <Link to='/top-artists'>
             <p className='text-gray-300 text-base cursor-pointer'>See more</p>
           </Link>
@@ -97,15 +97,16 @@ const TopPlay = () => {
         centeredSlidesBounds
         modules={[FreeMode]}
         className='mt-4'
+        
       >
         {topPlays?.map((song, i) => (
             <SwiperSlide 
               key={song?.id}
-              style={{width: '25%', height:'auto'}}
+              style={{width: '20%', height:'auto'}}
               className='shadow-lg rounded-full animate-slideright'
             >
               <Link to={`/artist/${song.artist?.id}`}>
-                <img src={song.album?.cover_xl} alt='name' className='rounded-full w-full object-cover'/>
+                <img src={song.album?.cover_xl} alt='name' className='w-[155px] rounded-full object-cover'/>
               </Link>
             </SwiperSlide>
         ))}

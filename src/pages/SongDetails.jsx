@@ -9,8 +9,10 @@ const SongDetails = () => {
     const dispatch = useDispatch();
     const { songid } = useParams();
     const { activeSong, isPlaying } = useSelector((state) => state.player);
-    const {data: songData, isFetching:isFetchingSongDetails } = useGetSongDetailsQuery({songid});
-    const {data, isFetching: isFetchingRelatedSongs, error} = useGetSongRelatedQuery({songid});
+    const {data: songData, isFetching:isFetchingSongDetails } = useGetSongDetailsQuery(songid);
+    const {data, isFetching: isFetchingRelatedSongs, error} = useGetSongRelatedQuery(songData?.artist?.tracklist);
+
+    console.log(songData?.artist?.id)
 
     const handlePauseClick = () => {
         dispatch(playPause(false));
@@ -26,7 +28,7 @@ const SongDetails = () => {
 
     return (
         <div className='flex flex-col'>
-            <DetailsHeader artistId="" songData={songData}></DetailsHeader>
+            <DetailsHeader artistId={songData?.artist?.id} songData={songData}></DetailsHeader>
             <div className="mb-10">
                 <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
             </div>

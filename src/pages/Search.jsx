@@ -4,11 +4,11 @@ import {Error, Loader, SongCard} from '../components';
 import { useGetSongsBySearchQuery, useGetTopChartsQuery } from '../redux/services/deezerCore';
 
 const Search = () => {
-    const {SearchTerm} = useParams();
+    const {searchTerm} = useParams();
     const {activeSong, isPlaying} = useSelector((state => state.player));
-    const {data, isFetching, error} = useGetSongsBySearchQuery(searchTerm);
+    const {data: searchData, isFetching, error} = useGetSongsBySearchQuery(searchTerm);
 
-    const songs = data?.tracks?.hits?.map((song) => song.track);
+    const songs = searchData?.data.map((song) => song);
 
     if(isFetching) return <Loader title="Loading top charts" />;
 
@@ -27,7 +27,7 @@ const Search = () => {
                         song={song}
                         isPlaying={isPlaying}
                         activeSong={activeSong}
-                        data={data}
+                        data={searchData}
                         i={i}
                     />
                 ))}

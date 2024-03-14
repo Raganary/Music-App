@@ -31,15 +31,15 @@ export const deezerCoreApi = createApi({
     //need to find lyrics and fix detail header
     getSongsByGenre: builder.query({query: (genre) => `/playlist/${genre}/`}),
 
-    getSongDetails: builder.query({query: ({songid}) => `/tracks?`}),
+    getSongDetails: builder.query({query: (songid) => `/track/${songid}`}),
     
-    getSongRelated: builder.query({query: ({songid}) => `/tracks/related?track_id=${songid}`}),
+    getSongRelated: builder.query({query: (songid) => `${songid}`}),
 
     getArtistDetails: builder.query({query:(artistId) => `/artist/${artistId}`}),
 
     getSongsByCountry: builder.query({ query:(countryCode) => `/playlist/${countryCode}`}),
-
-    getSongsBySearch: builder.query({query:(searchTerm) => `/search?term=${searchTerm}`}),
+    //allows to use url and params when there are more than just url with a value
+    getSongsBySearch: builder.query({query: (searchTerm) => ({ url: '/search', params: {q: searchTerm } })}),
   }),
 });
 

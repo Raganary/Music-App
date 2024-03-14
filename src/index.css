@@ -3,12 +3,9 @@
 @tailwind utilities;
 
 /* Active Navigation Link */
+/*active svg is related to the svg images*/
 .active {
-  @apply text-cyan-500;
-}
-
-.active svg {
-  @apply text-cyan-500;
+  @apply font-bold;
 }
 
 .bar:nth-child(2) {

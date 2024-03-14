@@ -12,13 +12,13 @@ const ArtistDetails = () => {
     if(isFetchingArtistDetails) return <Loader title="Loading artist details" />
 
     if(error) return <Error />;
-    
+
     return (
         <div className='flex flex-col'>
             <DetailsHeader artistId={artistId} artistData={artistData}></DetailsHeader>
 
             <RelatedSongs
-                data={Object.values(artistData?.songs)}
+                data={artistData}
                 artistId={artistId}
                 isPlaying={isPlaying}
                 activeSong={activeSong}
