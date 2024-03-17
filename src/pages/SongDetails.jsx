@@ -11,6 +11,7 @@ const SongDetails = () => {
     const { activeSong, isPlaying } = useSelector((state) => state.player);
     const {data: songData, isFetching:isFetchingSongDetails } = useGetSongDetailsQuery(songid);
     const {data, isFetching:isFetchingSearchingDetails, error:searchError} = useGetSongsBySearchQuery(songData?.artist?.name);
+    const currentPlaylist = data?.data;
 
     const handlePauseClick = () => {
         dispatch(playPause(false));
@@ -23,7 +24,7 @@ const SongDetails = () => {
     if(isFetchingSongDetails || isFetchingSearchingDetails) return <Loader title="Searching song details" />
 
     if(searchError) return <Error />;
-      console.log(songData)
+
     return (
         <div className='flex flex-col'>
             <DetailsHeader songData={songData}></DetailsHeader>

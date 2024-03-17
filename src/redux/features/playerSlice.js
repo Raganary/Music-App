@@ -15,39 +15,39 @@ const playerSlice = createSlice({
   reducers: {
     setActiveSong: (state, action) => {
       state.activeSong = action.payload.song;
-      
-      if (action.payload?.data?.tracks?.data) {
-        state.currentSongs = (action.payload.data.tracks.data);
-      } else if (action.payload?.data?.properties) {
-        state.currentSongs = action.payload?.data?.tracks;
+
+      if (action.payload?.data) {
+        state.currentSongs = (action.payload.data);
       } else {
-        state.currentSongs = action.payload.data;
+        state.currentSongs = (action.payload);
+      }
+      console.log(action)
+      state.currentIndex = action.payload.i;
+      state.isActive = true;
+    },
+
+    nextSong: (state, action) => {
+      //debugging requires the index.jsx file this is for main playlists
+      if (action.payload?.currentSongs.tracks.data[action.payload.i]) {
+        state.activeSong = action.payload?.currentSongs.tracks.data[action.payload.i];
+      } else {
+        state.activeSong = action?.payload?.currentSongs?.tracks?.data;
       }
 
       state.currentIndex = action.payload.i;
       state.isActive = true;
-      console.log(state.currentSongs)
-    },
-
-    nextSong: (state, action) => {
-      if (state.currentSongs[action.payload]) {
-        state.activeSong = state.currentSongs[action.payload];
-      } else {
-        state.activeSong = state.currentSongs[action.payload];
-      }
-
-      state.currentIndex = action.payload;
-      state.isActive = true;
     },
 
     prevSong: (state, action) => {
-      if (state.currentSongs[action.payload]?.track) {
-        state.activeSong = state.currentSongs[action.payload]?.track;
+      //similar to the nextSong reducer this one needs to check endpoint values to be able to grab data
+      //action values depend on the input
+      if (action.payload?.currentSongs?.tracks?.data[action.payload.i]) {
+        state.activeSong = action.payload?.currentSongs.tracks.data[action.payload.i];
       } else {
-        state.activeSong = state.currentSongs[action.payload];
+        state.activeSong = action?.payload?.currentSongs?.tracks?.data;
       }
 
-      state.currentIndex = action.payload;
+      state.currentIndex = action.payload.i;
       state.isActive = true;
     },
 

@@ -14,7 +14,7 @@ return (
         <div className="absolute w-full h-48 bg-gradient-to-t from-[#000000] rounded-lg">
           <p className="ml-5 mt-32 font-bold sm:tet-3xl text-xl text-white">{artistId ? artistData?.name : songData?.title}</p>
           {!artistId && (
-            <Link to={`/artists/${songData?.artist.id}`}>
+            <Link to={`/artist/${songData?.artist.id}`}>
               <p className="ml-5 text-base text-gray-400">{songData?.artist?.name}</p>
             </Link>
           )}

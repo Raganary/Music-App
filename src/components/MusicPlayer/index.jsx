@@ -16,10 +16,11 @@ const MusicPlayer = () => {
   const [volume, setVolume] = useState(0.3);
   const [repeat, setRepeat] = useState(false);
   const [shuffle, setShuffle] = useState(false);
+  const data = currentSongs;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currentSongs.duration) dispatch(playPause(true));
+    if (currentSongs?.nb_tracks) dispatch(playPause(true));
   }, [currentIndex]);
 
   const handlePlayPause = () => {
@@ -33,22 +34,32 @@ const MusicPlayer = () => {
   };
 
   const handleNextSong = () => {
+    //debugging issues what currentSongs was not being saved after transition from state to state
+    //state, action
+    //formating is action i.e. (activeSong, currentSongs, index)
     dispatch(playPause(false));
-
     if (!shuffle) {
-      dispatch(nextSong((currentIndex + 1) % currentSongs.duration));
+      //calculate next index and if the index has reached the end, the playlist index loops back
+      //round robin
+      //currentSongs variable is a playlist with number tracks as endpoint variable
+      const i = (currentIndex + 1) % currentSongs?.nb_tracks;
+      dispatch(nextSong({activeSong, currentSongs, i}));
     } else {
-      dispatch(nextSong(Math.floor(Math.random() * currentSongs.duration)));
+      const i = Math.floor(Math.random() *  currentSongs?.nb_tracks);
+      dispatch(nextSong({activeSong, currentSongs, i}));
     }
   };
 
   const handlePrevSong = () => {
     if (currentIndex === 0) {
-      dispatch(prevSong(currentSongs.duration - 1));
+      const i = currentSongs?.nb_tracks - 1;
+      dispatch(prevSong({activeSong, currentSongs, i}));
     } else if (shuffle) {
-      dispatch(prevSong(Math.floor(Math.random() * currentSongs.duration)));
+      const i = Math.floor(Math.random() * currentSongs?.nb_tracks);
+      dispatch(prevSong({activeSong, currentSongs, i}));
     } else {
-      dispatch(prevSong(currentIndex - 1));
+      const i = currentIndex - 1;
+      dispatch(prevSong({activeSong, currentSongs, i}));
     }
   };
 

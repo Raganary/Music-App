@@ -49,6 +49,7 @@ const TopPlay = () => {
   const {data} = useGetTopChartsQuery();
   const divRef = useRef(null);
   const topPlays = data?.tracks.data.slice(0,5);
+  const currentPlaylist = data?.tracks?.data;
 
   useEffect(() => {
     divRef.current.scrollIntoView({behavior: 'smooth'});

@@ -5,7 +5,6 @@ import { setActiveSong, playPause  } from '../redux/features/playerSlice';
 
 import { useGetArtistDetailsQuery, useGetSongsBySearchQuery } from '../redux/services/deezerCore';
 
-
 const ArtistDetails = () => {
     const dispatch = useDispatch();
     const { id:artistId } = useParams();
