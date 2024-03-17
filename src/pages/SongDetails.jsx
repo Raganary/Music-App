@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
 
 import { setActiveSong, playPause  } from '../redux/features/playerSlice';
-import { useGetSongDetailsQuery, useGetSongRelatedQuery } from '../redux/services/deezerCore';
+import { useGetSongDetailsQuery, useGetSongsBySearchQuery } from '../redux/services/deezerCore';
 
 const SongDetails = () => {
     const dispatch = useDispatch();
     const { songid } = useParams();
     const { activeSong, isPlaying } = useSelector((state) => state.player);
     const {data: songData, isFetching:isFetchingSongDetails } = useGetSongDetailsQuery(songid);
-    const {data, isFetching: isFetchingRelatedSongs, error} = useGetSongRelatedQuery(songData?.artist?.tracklist);
+    const {data, isFetching:isFetchingSearchingDetails, error:searchError} = useGetSongsBySearchQuery(songData?.artist?.name);
 
     const handlePauseClick = () => {
         dispatch(playPause(false));
@@ -20,21 +20,20 @@ const SongDetails = () => {
         dispatch(playPause(true));
       };
 
-    if(isFetchingSongDetails || isFetchingRelatedSongs) return <Loader title="Searching song details" />
+    if(isFetchingSongDetails || isFetchingSearchingDetails) return <Loader title="Searching song details" />
 
-    if(error) return <Error />;
-
+    if(searchError) return <Error />;
+      console.log(songData)
     return (
         <div className='flex flex-col'>
-            <DetailsHeader artistId={songData?.artist?.id} songData={songData}></DetailsHeader>
-            <div className="mb-10">
-                <h2 className="text-white text-3xl font-bold">Lyrics:</h2>
-            </div>
-
-            <div className="mt-5">
-                {songData?.sections[1].type === 'LYRICS' ? songData?.sections[1].text.map((line, i) => (
-                    <p className="text-gray-400 text-base my-1">{line}</p>
-                )) : <p className="text-gray-400 text-base my-1">Sorry, no lyrics found! </p>}
+            <DetailsHeader songData={songData}></DetailsHeader>
+            <div className="mb-5">
+                <h2 className="text-white text-xl font-bold">Album Title:</h2>
+                <p className="text-base text-gray-400 mb-2">{songData?.album?.title}</p>
+                <h2 className="text-white text-xl font-bold">Release Date:</h2>
+                <p className="text-base text-gray-400 mb-2">{songData?.album?.release_date}</p>
+                <h2 className="text-white text-xl font-bold">Gain:</h2>
+                <p className="text-base text-gray-400 ">{songData?.gain}</p>
             </div>
             <RelatedSongs
                 data={data}
@@ -42,6 +41,7 @@ const SongDetails = () => {
                 activeSong={activeSong}
                 handlePauseClick={handlePauseClick}
                 handlePlayClick={handlePlayClick}
+                artistId={songData?.artist?.id}
             />
         </div>
     );
