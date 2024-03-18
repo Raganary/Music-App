@@ -15,13 +15,12 @@ const playerSlice = createSlice({
   reducers: {
     setActiveSong: (state, action) => {
       state.activeSong = action.payload.song;
-
+      console.log(action.payload)
       if (action.payload?.data) {
         state.currentSongs = (action.payload.data);
       } else {
         state.currentSongs = (action.payload);
       }
-      console.log(action)
       state.currentIndex = action.payload.i;
       state.isActive = true;
     },
@@ -31,9 +30,9 @@ const playerSlice = createSlice({
       if (action.payload?.currentSongs.tracks.data[action.payload.i]) {
         state.activeSong = action.payload?.currentSongs.tracks.data[action.payload.i];
       } else {
-        state.activeSong = action?.payload?.currentSongs?.tracks?.data;
+        state.activeSong = action?.payload?.data?.data[action.payload.i];
       }
-
+      console.log(state.activeSong)
       state.currentIndex = action.payload.i;
       state.isActive = true;
     },

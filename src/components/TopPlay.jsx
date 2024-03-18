@@ -39,7 +39,7 @@ const ArtistImage = ({track}) => {
   const {data: artistData, isFetching:isFetchingArtistDetails } = useGetArtistDetailsQuery(track?.artist?.id);
 
   return (
-      <img src={artistData?.picture_medium}className='w-[140px] rounded-full object-cover'/>
+      <img src={artistData?.picture_medium}className='w-[135px] rounded-full object-cover'/>
   );
 };
 
@@ -64,7 +64,7 @@ const TopPlay = () => {
   };
 
   return(
-    <div ref={divRef} className='xl:ml-6 ml-0 xl:mb-0 mb-4 flex-1 xl:max-w-[500px] max-w-full flex flex-col'>
+    <div ref={divRef} className='xl:ml-6 ml-0 xl:mb-0 mb-2 flex-1 xl:max-w-[500px] max-w-full flex flex-col'>
       <div className='w-full flex flex-col'>
         <div className='flex flex-row justify-between items-center'>
           <h2 className='text-white font-bold text-xl'>Top Charts</h2>
@@ -73,7 +73,7 @@ const TopPlay = () => {
           </Link>
         </div>
 
-        <div className='mt-4 flex flex-col gap-1'>
+        <div className='mt-2 flex flex-col gap-1'>
           {topPlays?.map((song, i) => (
             <TopChartCard 
               key={song.id}
