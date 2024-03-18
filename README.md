@@ -1,8 +1,12 @@
-# Project Lyrics
+# Project Music App
 
-Develop an elegant React.js Music Application. 
+Developed a React.js Music Application. The link is (https://crenge.netlify.app/)
 
 Check out the complete project requirements [here](https://docs.google.com/document/d/13PeFwRlPEhMw_HPyrIrInvQuKaVWnpNmcv-y3NA208s/edit?usp=sharing)
+
+The project uses deezer api instead of shazams api. For geolocation is the IP Geolocation - IPWHOIS.io api.
+
+Tools used: React 18 with Redux, RapidApi, and Tailwind.
 
 # Contributing
 
