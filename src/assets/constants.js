@@ -1,4 +1,8 @@
-import { HiOutlineHashtag, HiOutlineHome, HiOutlinePhotograph, HiOutlineUserGroup } from 'react-icons/hi';
+import { TbWorld } from "react-icons/tb";
+import { VscHome } from "react-icons/vsc";
+import { RiBarChartGroupedFill } from "react-icons/ri";
+import { BiGroup } from "react-icons/bi";
+
 
 export const genres = [
     { title: 'Alternative', value: '1402845615' },
@@ -25,8 +29,8 @@ export const genres = [
 
 //has to apply to app.jsx
 export const links = [
-  { name: 'Discover', to: '/', icon: HiOutlineHome },
-  { name: 'Around You', to: '/around-you', icon: HiOutlinePhotograph },
-  { name: 'Top Artists', to: '/top-artists', icon: HiOutlineUserGroup },
-  { name: 'Top Charts', to: '/top-charts', icon: HiOutlineHashtag },
+  { name: 'Discover', to: '/', icon: VscHome },
+  { name: 'Around You', to: '/around-you', icon: TbWorld },
+  { name: 'Top Artists', to: '/top-artists', icon: BiGroup },
+  { name: 'Top Charts', to: '/top-charts', icon: RiBarChartGroupedFill },
 ];

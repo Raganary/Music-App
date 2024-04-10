@@ -9,6 +9,9 @@ import RelatedSongs from './RelatedSongs';
 import MusicPlayer from './MusicPlayer';
 import Loader from './Loader';
 import Error from './Error';
+import Login from './Login';
+import ProfileCard from './ProfileCard';
+import Registration from './Registration';
 
 export {
   TopPlay,
@@ -22,4 +25,7 @@ export {
   MusicPlayer,
   Loader,
   Error,
+  Login,
+  ProfileCard,
+  Registration,
 };
